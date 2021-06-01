@@ -14,6 +14,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         number = findViewById(R.id.main_number)
         button = findViewById(R.id.button)
+        
+        if (savedInstanceState != null){ // check Bundle and take data
+            number.text = savedInstanceState.getString("count")
+        }
 
         button.setOnClickListener {
             var num:Int = number.text.toString().toInt()+1
@@ -23,5 +27,10 @@ class MainActivity : AppCompatActivity() {
 
             number.text = String.format("%04d", num)
         }
+    }
+    
+     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("count", number.text.toString())
     }
 }
